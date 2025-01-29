@@ -73,7 +73,7 @@ export default {
           secondary: "#333333AD",
           disabled: "#3A354161",
         },
-        ligth: {
+        light: {
           primary: "#FFFFFF",
           secondary: "#C1C2C4",
           disabled: "#9D9EA1",
@@ -95,12 +95,13 @@ export default {
         "heading-1": ["48px", "52.8px"], // Heading 1
         "heading-2": ["40px", "44px"], // Heading 2
         "heading-3": ["32px", "35.2px"], // Heading 3
+        "heading-3-mobile": ["24px", "26.4px"], // Heading 3 mobile
         "heading-4": ["24px", "28.8px"], // Heading 4
         "heading-5": ["20px", "24px"], // Heading 5
         "heading-6": ["18px", "21.6px"], // Heading 6
         large: ["18px", "25.2px"], // Body Large
-        medium: ["16px", "22.4px"], // Body Medium
-        small: ["14px", "19.6px"], // Body Small
+        "body-medium": ["16px", "22.4px"], // Body Medium
+        "body-small": ["14px", "19.6px"], // Body Small
         subtitle: ["16px", "24px"], // Subtitle
       },
       fontWeight: {

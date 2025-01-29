@@ -1,46 +1,46 @@
 import { Button } from "@/elements/Buttons";
-import { InputFormDesktop, PasswordFormDesktop } from "@/elements/InputForm";
+import { InputForm, PasswordForm } from "@/elements/InputForm";
 import { useNavigate } from "react-router";
 
 export function Loginform() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-full min-h-[617px] w-[590px] flex-col gap-[36px] rounded-[4px] border border-[#f1f1f1] bg-primary-background p-[36px]">
-      <div className="flex h-[67px] w-[525px] flex-col items-center gap-[10px]">
-        <h3 className="font-heading text-heading-3 font-heading-3">
+    <div className="flex h-full min-h-[514px] w-full max-w-[320px] flex-col gap-[20px] rounded-[4px] border border-[#f1f1f1] bg-primary-background p-[20px] sm:h-full sm:min-h-[617px] sm:min-w-[590px] sm:gap-[36px] sm:p-[36px]">
+      <div className="flex h-[56px] w-[280px] flex-col items-center gap-[10px] sm:h-[67px] sm:w-[525px]">
+        <h3 className="font-heading text-heading-3-mobile font-heading-3 sm:text-heading-3">
           Masuk ke Akun
         </h3>
-        <p className="text-body-medium font-body font-medium-regular text-dark-secondary">
+        <p className="font-body text-small font-medium-regular text-dark-secondary sm:text-medium">
           Yuk, lanjutin belajarmu di videobelajar.
         </p>
       </div>
-      <form className="flex h-auto max-h-[442px] w-auto max-w-[518px] flex-col gap-[24px]">
-        <div className="flex h-auto max-h-[330px] w-auto max-w-[518px] flex-col gap-[24px]">
-          <div className="flex h-auto max-h-[206px] w-[518px] flex-col gap-[16px]">
-            <InputFormDesktop label="E-Mail" name="email" onChange={() => {}} />
-            <PasswordFormDesktop
+      <form className="flex h-auto min-h-[398px] w-full max-w-[280px] flex-col gap-[20px] sm:max-h-[442px] sm:w-auto sm:max-w-[518px] sm:gap-[24px]">
+        <div className="flex h-auto max-h-[304px] w-auto max-w-[280px] flex-col gap-[24px] sm:max-h-[330px] sm:max-w-[518px]">
+          <div className="flex h-auto max-h-[196px] w-full max-w-[280px] flex-col gap-[12px] sm:max-h-[206px] sm:max-w-[518px] sm:gap-[16px]">
+            <InputForm label="E-Mail" name="email" onChange={() => {}} />
+            <PasswordForm
               label="Kata Sandi"
               name="password"
               onChange={() => {}}
             />
             <a
               href=""
-              className="text-right font-body font-medium-medium tracking-medium text-[#4A505C]"
+              className="w-full text-right font-body font-medium-medium tracking-medium text-[#333333AD] sm:text-[#4A505C]"
             >
               Lupa Password?
             </a>
           </div>
-          <div className="flex h-auto max-h-[100px] w-auto max-w-[518px] flex-col gap-[16px]">
+          <div className="flex h-full max-h-[84px] w-auto max-w-[280px] flex-col gap-[16px] sm:max-h-[100px] sm:max-w-[518px]">
             <Button
               children="Masuk"
               type="submit"
-              className="bg-primary-default text-ligth-primary hover:bg-primary-hover"
+              className="text-light-primary bg-primary-default py-[7px] hover:bg-primary-hover sm:py-[10px]"
             />
             <Button
               children="Daftar"
               type="button"
               onClick={() => navigate("/register")}
-              className="bg-primary-100 text-primary-default hover:bg-primary-200"
+              className="bg-primary-100 py-[7px] text-primary-default hover:bg-primary-200 sm:py-[10px]"
             />
           </div>
         </div>
@@ -51,7 +51,7 @@ export function Loginform() {
           </p>
         </div>
         <Button
-          className="border bg-primary-background text-[#4A505C]"
+          className="border bg-primary-background py-[7px] text-[#4A505C] sm:py-[10px]"
           type="button"
           onClick={() => navigate("/register-google")}
         >
