@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import Login from "./pages/Login";
-import Index from "./pages/Index";
+import Home from "./pages/Home";
+import { Register } from "./pages/Register";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/login" element={<Login />} />
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );

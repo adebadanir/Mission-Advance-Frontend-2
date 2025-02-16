@@ -1,26 +1,32 @@
-import { Button } from "@/elements/Buttons";
-import { InputForm, PasswordForm } from "@/elements/InputForm";
+import { Button } from "@/components/Buttons";
+import { InputForm } from "@/components/InputForm";
 import { useNavigate } from "react-router";
 
 export function Loginform() {
   const navigate = useNavigate();
   return (
-    <div className="flex h-full min-h-[514px] w-full max-w-[320px] flex-col gap-[20px] rounded-[4px] border border-[#f1f1f1] bg-primary-background p-[20px] sm:h-full sm:min-h-[617px] sm:min-w-[590px] sm:gap-[36px] sm:p-[36px]">
+    <div className="flex h-full max-h-[514px] w-full max-w-[320px] flex-col gap-[20px] rounded-[4px] border border-[#f1f1f1] bg-primary-background p-[20px] sm:h-full sm:max-h-[617px] sm:min-w-[590px] sm:gap-[36px] sm:p-[36px]">
       <div className="flex h-[56px] w-[280px] flex-col items-center gap-[10px] sm:h-[67px] sm:w-[525px]">
         <h3 className="font-heading text-heading-3-mobile font-heading-3 sm:text-heading-3">
           Masuk ke Akun
         </h3>
-        <p className="font-body text-small font-medium-regular text-dark-secondary sm:text-medium">
+        <p className="text-small sm:text-medium font-body font-medium-regular text-dark-secondary">
           Yuk, lanjutin belajarmu di videobelajar.
         </p>
       </div>
       <form className="flex h-auto min-h-[398px] w-full max-w-[280px] flex-col gap-[20px] sm:max-h-[442px] sm:w-auto sm:max-w-[518px] sm:gap-[24px]">
         <div className="flex h-auto max-h-[304px] w-auto max-w-[280px] flex-col gap-[24px] sm:max-h-[330px] sm:max-w-[518px]">
           <div className="flex h-auto max-h-[196px] w-full max-w-[280px] flex-col gap-[12px] sm:max-h-[206px] sm:max-w-[518px] sm:gap-[16px]">
-            <InputForm label="E-Mail" name="email" onChange={() => {}} />
-            <PasswordForm
+            <InputForm
+              label="E-Mail"
+              name="email"
+              formType="email"
+              onChange={() => {}}
+            />
+            <InputForm
               label="Kata Sandi"
               name="password"
+              formType="password"
               onChange={() => {}}
             />
             <a
@@ -34,7 +40,7 @@ export function Loginform() {
             <Button
               children="Masuk"
               type="submit"
-              className="text-light-primary bg-primary-default py-[7px] hover:bg-primary-hover sm:py-[10px]"
+              className="bg-primary-default py-[7px] text-light-primary hover:bg-primary-hover sm:py-[10px]"
             />
             <Button
               children="Daftar"
@@ -46,7 +52,7 @@ export function Loginform() {
         </div>
         <div className="relative flex h-[22px] w-full max-w-[518px] items-center justify-center gap-[10px]">
           <div className="z-0 h-[2px] w-[518px] border"></div>
-          <p className="absolute left-1/2 flex h-auto max-h-[22px] w-auto max-w-[50px] -translate-x-1/2 transform gap-[10px] bg-primary-background px-[8px] font-body text-medium font-medium-regular tracking-medium text-[#4A505C]">
+          <p className="text-medium absolute left-1/2 flex h-auto max-h-[22px] w-auto max-w-[50px] -translate-x-1/2 transform gap-[10px] bg-primary-background px-[8px] font-body font-medium-regular tracking-medium text-[#4A505C]">
             atau
           </p>
         </div>

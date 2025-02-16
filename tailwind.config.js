@@ -99,9 +99,13 @@ export default {
         "heading-4": ["24px", "28.8px"], // Heading 4
         "heading-5": ["20px", "24px"], // Heading 5
         "heading-6": ["18px", "21.6px"], // Heading 6
+        "heading-6-mobile": ["16px", "19.2px"], // Heading 6
         large: ["18px", "25.2px"], // Body Large
+        "body-large": ["18px", "25.2px"], // Body Medium
         "body-medium": ["16px", "22.4px"], // Body Medium
+        "body-medium-mobile": ["14px", "19.6px"], // Body Medium
         "body-small": ["14px", "19.6px"], // Body Small
+        "body-small-mobile": ["12px", "16.8px"], // Body Small
         subtitle: ["16px", "24px"], // Subtitle
       },
       fontWeight: {
