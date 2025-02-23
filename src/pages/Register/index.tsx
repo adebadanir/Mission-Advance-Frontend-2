@@ -1,12 +1,12 @@
-import { Navbar } from "@/components/Navbar";
+import { FormRegister } from "@/components/Forms/RegisterForm/FormRegister";
+import { Template } from "@/templates/Template";
 
 export function Register() {
   return (
-    <div className="grid">
-      <Navbar />
-      <section className="flex h-screen w-full flex-col items-center justify-center px-[20px] py-[28px]">
-        register form
+    <Template>
+      <section className="w-screen flex-col px-[20px] py-[28px]">
+        <FormRegister />
       </section>
-    </div>
+    </Template>
   );
 }

@@ -1,13 +1,12 @@
-import { Loginform } from "./components/LoginForm";
-import { Navbar } from "@/components/Navbar";
+import { FormLogin } from "@/components/Forms/FormLogin/FormLogin";
+import { Template } from "@/templates/Template";
 
 export default function Login() {
   return (
-    <div className="grid h-full max-h-screen">
-      <Navbar />
-      <section className="flex h-full w-full flex-col items-center justify-center px-[20px] py-[28px] sm:h-[800px]">
-        <Loginform />
+    <Template>
+      <section className="flex w-screen items-center px-[20px] py-[28px] sm:h-[800px]">
+        <FormLogin />
       </section>
-    </div>
+    </Template>
   );
 }
