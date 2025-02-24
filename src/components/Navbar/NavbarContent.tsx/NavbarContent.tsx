@@ -7,11 +7,10 @@ export function NavbarContent({ login }: { login: boolean }) {
   const navigate = useNavigate();
   const { setIsLogin } = useIsLoginStore();
 
-  const { isOpen, setIsOpen } = useIsOpenStore();
+  const { isOpen } = useIsOpenStore();
 
   const handleLogout = () => {
     setIsLogin(false);
-    setIsOpen(false);
     navigate("/login");
   };
 

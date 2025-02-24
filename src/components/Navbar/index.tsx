@@ -40,7 +40,7 @@ export function Navbar(props: Props) {
           <NavbarLinks login={isLogin} onClick={handleToggle} />
 
           <button
-            className={`h-[24px] w-[24px] items-center justify-center ${location.pathname !== "/" ? "hidden" : "flex sm:hidden"}`}
+            className={`h-[24px] w-[24px] items-center justify-center ${location.pathname === "/login" || location.pathname === "/register" ? "hidden" : "flex sm:hidden"}`}
             onClick={handleToggle}
           >
             <MdMenu size={24} />

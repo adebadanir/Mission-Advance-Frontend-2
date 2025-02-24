@@ -11,7 +11,11 @@ export function NavbarLinks({
 }) {
   const navigate = useNavigate();
   const location = useLocation();
-  if (location.pathname !== "/" || login === false) {
+  if (
+    (location.pathname === "/" && login === false) ||
+    location.pathname === "/login" ||
+    location.pathname === "/register"
+  ) {
     return (
       <div
         className={`${location.pathname !== "/" || login ? "hidden" : "hidden sm:flex"} sm:gap-[36px]`}
@@ -38,13 +42,6 @@ export function NavbarLinks({
       </div>
     );
   } else {
-    return (
-      <div className={`hidden items-center sm:flex sm:gap-[36px]`}>
-        <button className="text-body-medium font-medium tracking-medium text-dark-secondary">
-          Kategori
-        </button>
-        <Avatar onClick={onClick} />
-      </div>
-    );
+    return <Avatar onClick={onClick} />;
   }
 }

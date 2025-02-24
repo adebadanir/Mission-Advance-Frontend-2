@@ -1,25 +1,12 @@
 import { Button } from "@/elements/Buttons";
 import { InputText } from "@/elements/Inputs/InputText";
-import authService from "@/services/authService";
-import { useState } from "react";
+import { useLogin } from "@/hooks/login/useLogin";
 import { useNavigate } from "react-router";
 
 export function FormLogin() {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State untuk pesan error
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const message = await authService({ email, password });
-    if (message === "Login berhasil") {
-      navigate("/"); // Redirect ke halaman utama setelah login sukses
-    } else {
-      setError(message); // Set error jika login gagal
-    }
-  };
+  const { email, setEmail, password, setPassword, error, handleLogin } =
+    useLogin();
 
   return (
     <div className="m-auto flex h-auto w-full max-w-[320px] flex-col gap-[20px] rounded-[4px] border border-[#f1f1f1] bg-primary-background p-[20px] sm:min-w-[590px] sm:gap-[36px] sm:p-[36px]">
