@@ -5,10 +5,11 @@ import { NavLink } from "react-router";
 import { MdLogout } from "react-icons/md";
 export function Avatar({ onClick }: { onClick: () => void }) {
   const { isOpen } = useIsOpenStore();
-  const { setIsLogin } = useIsLoginStore();
+  const { setIsLogin, setUserId } = useIsLoginStore();
   const navigate = useNavigate();
   const handleLogout = () => {
     setIsLogin(false);
+    setUserId("");
     navigate("/login");
   };
   return (

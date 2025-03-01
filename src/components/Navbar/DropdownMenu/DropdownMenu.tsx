@@ -3,14 +3,15 @@ import useIsOpenStore from "@/stores/dropDownStore";
 import useIsLoginStore from "@/stores/loginStore";
 import { useNavigate } from "react-router";
 
-export function NavbarContent({ login }: { login: boolean }) {
+export function DropdownMenu({ login }: { login: boolean }) {
   const navigate = useNavigate();
-  const { setIsLogin } = useIsLoginStore();
+  const { setIsLogin, setUserId } = useIsLoginStore();
 
   const { isOpen } = useIsOpenStore();
 
   const handleLogout = () => {
     setIsLogin(false);
+    setUserId("");
     navigate("/login");
   };
 

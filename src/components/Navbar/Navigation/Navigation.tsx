@@ -2,7 +2,7 @@ import { Button } from "@/elements/Buttons";
 import { useLocation, useNavigate } from "react-router";
 import { Avatar } from "../Avatar/Avatar";
 
-export function NavbarLinks({
+export function Navigation({
   login,
   onClick,
 }: {

@@ -1,12 +1,13 @@
 import useIsLoginStore from "@/stores/loginStore";
 
 interface User {
+  id: number;
   email: string;
   password: string;
 }
 
 const authService = async ({ email, password }: User): Promise<string> => {
-  const { setIsLogin } = useIsLoginStore.getState();
+  const { setIsLogin, setUserId } = useIsLoginStore.getState();
   const apiUrl = import.meta.env.VITE_API_URL;
 
   try {
@@ -33,6 +34,7 @@ const authService = async ({ email, password }: User): Promise<string> => {
     }
 
     setIsLogin(true);
+    setUserId(user.id.toString());
     return "Login berhasil";
   } catch (error) {
     console.error("Error:", error);

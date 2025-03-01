@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router";
 import { MdMenu } from "react-icons/md";
 
-import { NavbarContent } from "./NavbarContent.tsx/NavbarContent.tsx";
-import { NavbarLinks } from "./NavbarLinks/NavbarLinks.tsx";
+import { DropdownMenu } from "./DropdownMenu/DropdownMenu.tsx";
+import { Navigation } from "./Navigation/Navigation.tsx";
 import useIsOpenStore from "@/stores/dropDownStore.ts";
 
 interface Props {
@@ -37,7 +37,7 @@ export function Navbar(props: Props) {
             />
           </button>
 
-          <NavbarLinks login={isLogin} onClick={handleToggle} />
+          <Navigation login={isLogin} onClick={handleToggle} />
 
           <button
             className={`h-[24px] w-[24px] items-center justify-center ${location.pathname === "/login" || location.pathname === "/register" ? "hidden" : "flex sm:hidden"}`}
@@ -47,7 +47,7 @@ export function Navbar(props: Props) {
           </button>
         </nav>
       </header>
-      <NavbarContent login={isLogin} />
+      <DropdownMenu login={isLogin} />
     </>
   );
 }
