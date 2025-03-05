@@ -5,8 +5,15 @@ import { useNavigate } from "react-router";
 
 export function FormLogin() {
   const navigate = useNavigate();
-  const { email, setEmail, password, setPassword, error, handleLogin } =
-    useLogin();
+  const {
+    message,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    error,
+    handleLogin,
+  } = useLogin();
 
   return (
     <div className="m-auto flex h-auto w-full max-w-[320px] flex-col gap-[20px] rounded-[4px] border border-[#f1f1f1] bg-primary-background p-[20px] sm:min-w-[590px] sm:gap-[36px] sm:p-[36px]">
@@ -46,6 +53,7 @@ export function FormLogin() {
               Lupa Password?
             </a>
           </div>
+          <p className="text-green-500">{message}</p>
           <div className="flex h-full max-h-[84px] w-auto max-w-[280px] flex-col gap-[16px] sm:max-h-[100px] sm:max-w-[518px]">
             <Button
               children="Masuk"

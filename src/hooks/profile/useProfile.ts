@@ -1,15 +1,19 @@
 import useIsLoginStore from "@/stores/loginStore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import {
+  getUserById,
+  updateUser,
+  deleteUser,
+} from "@/services/api/userService";
 
 import { z } from "zod";
 
 export const useProfile = () => {
-  const apiUrl = import.meta.env.VITE_API_URL;
   const { userId, setIsLogin, setUserId } = useIsLoginStore();
   const navigate = useNavigate();
 
-  const registerSchema = z.object({
+  const userSchema = z.object({
     name: z.string().min(3, "Nama minimal 3 karakter"),
     email: z.string().email("Format email tidak valid"),
     phoneNumber: z.string().min(10, "Nomor HP minimal 10 digit"),
@@ -20,6 +24,7 @@ export const useProfile = () => {
     email: "",
     phoneNumber: "",
   });
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,35 +39,19 @@ export const useProfile = () => {
     return { countryCode: null, number: phoneNumber };
   };
 
-  const fetchUserById = async () => {
-    try {
-      const response = await fetch(`${apiUrl}/users/${userId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const data = await response.json();
-      setFormData(data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchUserById();
+    const getUser = async (userId: string) => {
+      setLoading(true);
+      const userData = await getUserById(userId);
+      setFormData(userData);
+      setLoading(false);
+    };
+    getUser(userId);
   }, []);
 
   const handleUpdate = async () => {
     try {
-      const response = await fetch(`${apiUrl}/users/${userId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      await response.json();
+      await updateUser(userId, formData);
       setTimeout(() => {
         window.location.reload(); // Reload halaman setelah submit
       }, 500);
@@ -70,16 +59,10 @@ export const useProfile = () => {
       console.error("Error:", error);
     }
   };
+
   const handleDelete = async () => {
     try {
-      const response = await fetch(`${apiUrl}/users/${userId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      await response.json();
+      await deleteUser(userId);
       setTimeout(() => {
         setIsLogin(false);
         setUserId("");
@@ -92,7 +75,7 @@ export const useProfile = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const validationResult = registerSchema.safeParse(formData);
+    const validationResult = userSchema.safeParse(formData);
     if (!validationResult.success) {
       const formattedErrors: Record<string, string> = {};
       validationResult.error.errors.forEach((err) => {
@@ -106,6 +89,7 @@ export const useProfile = () => {
   };
 
   return {
+    loading,
     formData,
     handleChange,
     splitCountryCode,

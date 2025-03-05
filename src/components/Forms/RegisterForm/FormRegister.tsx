@@ -3,12 +3,18 @@ import { useNavigate } from "react-router";
 import { Button } from "@/elements/Buttons";
 import { InputText } from "@/elements/Inputs/InputText";
 import { InputPhone } from "@/elements/Inputs/InputPhone";
-import { useRegister } from "@/hooks/login/useRegister";
+import { useRegister } from "@/hooks/Register/useRegister";
 
 export function FormRegister() {
   const navigate = useNavigate();
-  const { formData, handleChange, handlePhoneChange, handleSubmit, errors } =
-    useRegister();
+  const {
+    message,
+    formData,
+    handleChange,
+    handlePhoneChange,
+    handleSubmit,
+    errors,
+  } = useRegister();
 
   return (
     <form
@@ -77,6 +83,7 @@ export function FormRegister() {
               Lupa Password?
             </a>
           </div>
+          <p className="text-green-500">{message}</p>
 
           <div className="flex h-full max-h-[84px] w-full flex-col gap-[16px] sm:max-h-[100px] sm:max-w-[518px]">
             <Button

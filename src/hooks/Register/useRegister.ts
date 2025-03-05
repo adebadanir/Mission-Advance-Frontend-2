@@ -1,10 +1,10 @@
+import { createUser } from "@/services/api/userService";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { z } from "zod";
 
 export function useRegister() {
   const navigate = useNavigate();
-  const apiUrl = import.meta.env.VITE_API_URL;
 
   const registerSchema = z
     .object({
@@ -29,6 +29,7 @@ export function useRegister() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  const [message, setMessage] = useState<string>("");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -42,15 +43,11 @@ export function useRegister() {
 
   const fetchRegister = async () => {
     try {
-      const response = await fetch(`${apiUrl}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      await response.json();
-      navigate("/login");
+      await createUser(formData);
+      setMessage("Register berhasil! Mengalihkan ke login...");
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
     } catch (error) {
       console.error("Error:", error);
     }
@@ -72,6 +69,7 @@ export function useRegister() {
   };
 
   return {
+    message,
     formData,
     handleChange,
     handlePhoneChange,

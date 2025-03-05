@@ -1,7 +1,7 @@
 import useIsLoginStore from "@/stores/loginStore";
 
 interface User {
-  id: number;
+  id?: number;
   email: string;
   password: string;
 }
@@ -34,7 +34,7 @@ const authService = async ({ email, password }: User): Promise<string> => {
     }
 
     setIsLogin(true);
-    setUserId(user.id.toString());
+    setUserId(user.id ? user.id.toString() : "");
     return "Login berhasil";
   } catch (error) {
     console.error("Error:", error);

@@ -7,18 +7,21 @@ export function useLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const message = await authService({ email, password });
-    if (message === "Login berhasil") {
+    const response = await authService({ email, password });
+    if (response === "Login berhasil") {
+      setMessage("Login berhasil! Mengalihkan ke halaman utama...");
       navigate("/");
     } else {
-      setError(message);
+      setError(response);
     }
   };
 
   return {
+    message,
     email,
     setEmail,
     password,
