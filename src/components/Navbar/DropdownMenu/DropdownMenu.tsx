@@ -1,17 +1,19 @@
 import { Button } from "@/elements/Buttons";
 import useIsOpenStore from "@/stores/dropDownStore";
 import useIsLoginStore from "@/stores/loginStore";
+import useUserStore from "@/stores/userStore";
 import { useNavigate } from "react-router";
 
 export function DropdownMenu({ login }: { login: boolean }) {
   const navigate = useNavigate();
-  const { setIsLogin, setUserId } = useIsLoginStore();
+  const { setIsLogin } = useIsLoginStore();
+  const { setUser } = useUserStore();
 
   const { isOpen } = useIsOpenStore();
 
   const handleLogout = () => {
     setIsLogin(false);
-    setUserId("");
+    setUser([]);
     navigate("/login");
   };
 

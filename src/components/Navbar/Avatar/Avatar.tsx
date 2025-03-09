@@ -3,13 +3,15 @@ import useIsLoginStore from "@/stores/loginStore";
 import { useNavigate } from "react-router";
 import { NavLink } from "react-router";
 import { MdLogout } from "react-icons/md";
+import useUserStore from "@/stores/userStore";
 export function Avatar({ onClick }: { onClick: () => void }) {
   const { isOpen } = useIsOpenStore();
-  const { setIsLogin, setUserId } = useIsLoginStore();
+  const { setIsLogin } = useIsLoginStore();
+  const { user, setUser } = useUserStore();
   const navigate = useNavigate();
   const handleLogout = () => {
     setIsLogin(false);
-    setUserId("");
+    setUser([]);
     navigate("/login");
   };
   return (
@@ -23,9 +25,9 @@ export function Avatar({ onClick }: { onClick: () => void }) {
         <div className="flex flex-col">
           <button className={``} onClick={onClick}>
             <img
-              src="/images/Avatar.png"
+              src={user[0].avatar}
               alt="avatar"
-              className={`sm:w[44px] rounded-[10px] sm:h-[44px]`}
+              className={`rounded-[10px] sm:h-[44px] sm:w-[44px]`}
             />
           </button>
         </div>

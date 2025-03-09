@@ -1,13 +1,18 @@
 import useIsLoginStore from "@/stores/loginStore";
+import useUserStore from "@/stores/userStore";
 
 interface User {
-  id?: number;
+  id: string;
   email: string;
   password: string;
+  phoneNumber: string;
+  avatar: string;
 }
 
 const authService = async ({ email, password }: User): Promise<string> => {
-  const { setIsLogin, setUserId } = useIsLoginStore.getState();
+  const { setIsLogin } = useIsLoginStore.getState();
+  const { setUser } = useUserStore.getState();
+
   const apiUrl = import.meta.env.VITE_API_URL;
 
   try {
@@ -23,18 +28,27 @@ const authService = async ({ email, password }: User): Promise<string> => {
     }
 
     const data: User[] = await response.json();
-    const user = data.find((user) => user.email === email);
+    const result = data.find((user) => user.email === email);
 
-    if (!user) {
+    if (!result) {
       return "Email tidak ditemukan";
     }
 
-    if (user.password !== password) {
+    if (result.password !== password) {
       return "Password salah";
     }
-
+    console.log(result);
+    const userData = [
+      {
+        userId: result.id,
+        email: result.email,
+        phoneNumber: result.phoneNumber,
+        avatar: result.avatar,
+      },
+    ];
+    console.log(userData);
     setIsLogin(true);
-    setUserId(user.id ? user.id.toString() : "");
+    setUser(userData);
     return "Login berhasil";
   } catch (error) {
     console.error("Error:", error);
@@ -42,4 +56,4 @@ const authService = async ({ email, password }: User): Promise<string> => {
   }
 };
 
-export default authService;
+export { authService };

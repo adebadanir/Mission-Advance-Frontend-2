@@ -1,5 +1,5 @@
 import { ProfileSidebar } from "./ProfileSideBar/ProfileSIdebar";
-import { ProfileContent } from "./ProfileContent/ProfileContect";
+import { ProfileContent } from "./ProfileContent/ProfileContent";
 
 export function ProfileSection() {
   return (

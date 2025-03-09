@@ -1,38 +1,10 @@
-import { useState, useEffect } from "react";
-
 import { Cards } from "./Cards/Cards";
 import { Tabs } from "./Tabs/Tabs";
+import { useProducts } from "@/hooks/products/useProducts";
 
-export function SectionCard() {
-  interface CourseData {
-    courseImage: string;
-    title: string;
-    description: string;
-    tutorImage: string;
-    tutorName: string;
-    tutorPosition: string;
-    tutorCompany: string;
-    rating: number;
-    reviewCount: number;
-    price: number;
-  }
+export function ListView() {
+  const { products } = useProducts();
 
-  const [data, setData] = useState<CourseData[]>([]);
-
-  const fetchData = async () => {
-    const url = import.meta.env.VITE_API_URL;
-    try {
-      const response = await fetch(`${url}/products`);
-      const data = await response.json();
-      setData(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
   return (
     <div className="flex w-full max-w-[320px] flex-col gap-[24px] sm:h-auto sm:max-w-[1440px] sm:gap-[32px]">
       <div className="flex w-full max-w-[320px] flex-col gap-[10px] sm:h-auto sm:max-h-[67px] sm:w-auto sm:max-w-[623px]">
@@ -53,7 +25,7 @@ export function SectionCard() {
         ]}
       />
       <div className="grid w-full max-w-[320px] grid-cols-1 place-items-center gap-[20px] sm:max-w-[1200px] sm:gap-[24px] lg:grid-cols-3">
-        {data.slice(0, 9).map((data, index) => (
+        {products.slice(0, 9).map((data, index) => (
           <Cards
             key={index}
             courseImage={data.courseImage}
@@ -65,9 +37,9 @@ export function SectionCard() {
             tutorName={data.tutorName}
             tutorPosition={data.tutorPosition}
             tutorCompany={data.tutorCompany}
-            rating={data.rating}
-            reviewCount={data.reviewCount}
-            price={data.price}
+            rating={data.rating ?? 0}
+            reviewCount={data.reviewCount ?? 0}
+            price={data.price ?? 0}
           />
         ))}
       </div>

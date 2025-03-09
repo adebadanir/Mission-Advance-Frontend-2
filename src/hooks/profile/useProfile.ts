@@ -8,9 +8,11 @@ import {
 } from "@/services/api/userService";
 
 import { z } from "zod";
+import useUserStore from "@/stores/userStore";
 
 export const useProfile = () => {
-  const { userId, setIsLogin, setUserId } = useIsLoginStore();
+  const { setIsLogin } = useIsLoginStore();
+  const { user, setUser } = useUserStore();
   const navigate = useNavigate();
 
   const userSchema = z.object({
@@ -18,12 +20,14 @@ export const useProfile = () => {
     email: z.string().email("Format email tidak valid"),
     phoneNumber: z.string().min(10, "Nomor HP minimal 10 digit"),
   });
+
   const [formData, setFormData] = useState({
-    avatar: "",
     name: "",
     email: "",
     phoneNumber: "",
+    avatar: "",
   });
+
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -31,11 +35,20 @@ export const useProfile = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
   const splitCountryCode = (phoneNumber: string) => {
+    // Ensure phoneNumber is a valid string before calling match
+    if (!phoneNumber) {
+      return { countryCode: null, number: phoneNumber };
+    }
+
     const match = phoneNumber.match(/^(\+\d{0,2})(\d+)$/);
+
     if (match) {
       return { countryCode: match[1], number: match[2] };
     }
+
+    // Return null country code if no match is found
     return { countryCode: null, number: phoneNumber };
   };
 
@@ -46,12 +59,12 @@ export const useProfile = () => {
       setFormData(userData);
       setLoading(false);
     };
-    getUser(userId);
+    getUser(user[0].userId);
   }, []);
 
   const handleUpdate = async () => {
     try {
-      await updateUser(userId, formData);
+      await updateUser(user[0].userId, formData);
       setTimeout(() => {
         window.location.reload(); // Reload halaman setelah submit
       }, 500);
@@ -62,10 +75,10 @@ export const useProfile = () => {
 
   const handleDelete = async () => {
     try {
-      await deleteUser(userId);
+      await deleteUser(user[0].userId);
       setTimeout(() => {
         setIsLogin(false);
-        setUserId("");
+        setUser([]);
         navigate("/login");
       }, 500);
     } catch (error) {
