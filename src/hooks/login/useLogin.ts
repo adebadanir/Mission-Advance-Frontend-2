@@ -11,7 +11,10 @@ export function useLogin() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await authService({ email, password });
+    const response = await authService({
+      email,
+      password,
+    });
     if (response === "Login berhasil") {
       setMessage("Login berhasil! Mengalihkan ke halaman utama...");
       navigate("/");

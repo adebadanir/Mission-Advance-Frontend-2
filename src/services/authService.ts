@@ -9,7 +9,13 @@ interface User {
   avatar: string;
 }
 
-const authService = async ({ email, password }: User): Promise<string> => {
+const authService = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}): Promise<string> => {
   const { setIsLogin } = useIsLoginStore.getState();
   const { setUser } = useUserStore.getState();
 
